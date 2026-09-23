@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}CampusConnect — Build Your Career{% endblock %}
+{% block content %}
+<section class="hero container">
+  <div class="hero-copy">
+    <div class="eyebrow"><span class="pulse"></span> CAMPUS CAREER ECOSYSTEM</div>
+    <h1>From <span>classroom</span><br>to career.</h1>
+    <p class="hero-text">A unified placement and internship portal that connects students with meaningful opportunities — while giving placement teams a smarter way to manage talent.</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="{{ url_for('jobs') }}">Explore opportunities <span>↗</span></a>
+      <a class="btn secondary" href="{{ url_for('register') }}">Create student profile</a>
+    </div>
+    <div class="trust-row">
+      <div><strong>{{ stats.jobs }}+</strong><small>Opportunities</small></div>
+      <div><strong>{{ stats.students }}+</strong><small>Students</small></div>
+      <div><strong>{{ stats.applications }}+</strong><small>Applications</small></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="orbit orbit-1"></div><div class="orbit orbit-2"></div>
+    <div class="dashboard-card">
+      <div class="mini-top"><span>PLACEMENT HUB</span><span class="live-dot">● LIVE</span></div>
+      <div class="metric-big">Career<br><span>momentum.</span></div>
+      <div class="mini-chart"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="mini-grid">
+        <div><span>Active roles</span><b>{{ stats.jobs }}</b></div>
+        <div><span>Applications</span><b>{{ stats.applications }}</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section container">
+  <div class="section-head">
+    <div><span class="eyebrow">DISCOVER • APPLY • GROW</span><h2>Everything a student needs.</h2></div>
+    <a class="text-link" href="{{ url_for('jobs') }}">View all roles →</a>
+  </div>
+  <div class="feature-grid">
+    <div class="feature-card"><span class="feature-icon">◎</span><h3>Smart discovery</h3><p>Search roles by skill, company, category and work mode.</p></div>
+    <div class="feature-card"><span class="feature-icon">↗</span><h3>One profile</h3><p>Keep your academic details, skills and resume ready to apply.</p></div>
+    <div class="feature-card"><span class="feature-icon">◌</span><h3>Track progress</h3><p>See every application move from applied to interview or selection.</p></div>
+    <div class="feature-card"><span class="feature-icon">▦</span><h3>Admin control</h3><p>Placement teams can publish roles and manage applications centrally.</p></div>
+  </div>
+</section>
+
+<section class="section container">
+  <div class="section-head"><div><span class="eyebrow">LATEST OPPORTUNITIES</span><h2>Roles worth exploring.</h2></div></div>
+  <div class="job-grid">
+    {% for job in jobs %}
+    <a class="job-card" href="{{ url_for('job_detail', job_id=job.id) }}">
+      <div class="company-logo">{{ job.company[0] }}</div>
+      <div class="job-main"><span class="tag">{{ job.job_type }}</span><h3>{{ job.title }}</h3><p>{{ job.company }} · {{ job.location }}</p></div>
+      <span class="arrow">↗</span>
+      <div class="skills">{{ job.skills }}</div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
